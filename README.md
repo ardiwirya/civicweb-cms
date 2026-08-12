@@ -6,7 +6,7 @@ lewat database, bukan lewat kode.
 
 ## Preview
 
-![Home](/public/home.png)
+![Home](./docs/home.png)
 
 ## Tech Stack
 

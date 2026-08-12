@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Nilai default (fallback), akan di-override lewat inline style
+     di BaseLayout.astro berdasarkan institution_profile.primary_color
+     dan secondary_color. Format: "R G B" tanpa koma, sesuai kebutuhan
+     Tailwind rgb(var(...) / <alpha-value>). */
+  --color-brand-primary: 22 163 74;
+  --color-brand-secondary: 15 23 42;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100;
+}

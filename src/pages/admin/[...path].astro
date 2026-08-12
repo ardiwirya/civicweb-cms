@@ -4,6 +4,7 @@
 // client oleh React Router di src/admin/App.tsx.
 // client:only dipakai karena dashboard butuh session auth browser
 // (localStorage) dan tidak perlu di-SSR / tidak perlu SEO.
+import "@/styles/global.css";
 import AdminApp from "@/admin/App";
 ---
 
@@ -12,6 +13,7 @@ import AdminApp from "@/admin/App";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" />
     <title>Admin Dashboard</title>
   </head>
   <body>

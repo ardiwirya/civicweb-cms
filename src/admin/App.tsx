@@ -28,7 +28,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isLoading, userId } = useAuth();
 
   if (isLoading) return <div className="p-6 text-sm text-slate-500">Memuat...</div>;
-  if (!userId) return <Navigate to="/admin/login" replace />;
+  if (!userId) return <Navigate to="/login" replace />;
 
   return <>{children}</>;
 }

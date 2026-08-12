@@ -23,7 +23,8 @@ export default function LoginPage() {
     setFormError(null);
     const { error } = await supabase.auth.signInWithPassword(values);
     if (error) {
-      setFormError("Email atau password salah.");
+      console.error("Login gagal:", error);
+      setFormError(error.message);
       return;
     }
     // Auth state berubah otomatis lewat onAuthStateChange di useAuth,

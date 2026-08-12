@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import EmptyState from "@/components/ui/EmptyState.astro";
+import { supabase } from "@/lib/supabase/client";
+
+const { data: businesses } = await supabase
+  .from("businesses")
+  .select("id, name, owner_name, description, category, image_url, phone")
+  .order("created_at", { ascending: false });
+---
+
+<BaseLayout title="UMKM">
+  <SectionHeader title="UMKM" subtitle="Produk dan usaha masyarakat" />
+
+  <section class="mx-auto max-w-6xl px-4 pb-16">
+    {businesses?.length ? (
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {businesses.map((item) => (
+          <div class="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
+            {item.image_url && (
+              <img src={item.image_url} alt={item.name} class="mb-3 h-40 w-full rounded-md object-cover" />
+            )}
+            {item.category && <span class="text-xs font-medium uppercase text-brand-primary">{item.category}</span>}
+            <h2 class="mt-1 font-medium text-slate-900 dark:text-white">{item.name}</h2>
+            {item.owner_name && <p class="text-sm text-slate-500 dark:text-slate-400">Pemilik: {item.owner_name}</p>}
+            {item.description && <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.description}</p>}
+            {item.phone && <p class="mt-2 text-sm text-slate-700 dark:text-slate-300">Kontak: {item.phone}</p>}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <EmptyState message="Belum ada data UMKM." />
+    )}
+  </section>
+</BaseLayout>

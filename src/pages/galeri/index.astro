@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import EmptyState from "@/components/ui/EmptyState.astro";
+import { supabase } from "@/lib/supabase/client";
+
+const { data: albums } = await supabase
+  .from("gallery_albums")
+  .select("id, title, description, cover_image_url")
+  .order("created_at", { ascending: false });
+---
+
+<BaseLayout title="Galeri">
+  <SectionHeader title="Galeri" />
+
+  <section class="mx-auto max-w-6xl px-4 pb-16">
+    {albums?.length ? (
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {albums.map((album) => (
+          <a href={`/galeri/${album.id}`} class="block rounded-lg border border-slate-200 p-4 hover:border-brand-primary dark:border-slate-800">
+            {album.cover_image_url && (
+              <img src={album.cover_image_url} alt={album.title} class="mb-3 h-40 w-full rounded-md object-cover" />
+            )}
+            <h2 class="font-medium text-slate-900 dark:text-white">{album.title}</h2>
+            {album.description && <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{album.description}</p>}
+          </a>
+        ))}
+      </div>
+    ) : (
+      <EmptyState message="Belum ada album galeri." />
+    )}
+  </section>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import { getInstitutionProfile } from "@/lib/config/site";
+
+const institution = await getInstitutionProfile();
+
+const links = [
+  { label: "Visi & Misi", href: "/visi-misi", desc: "Arah dan tujuan pembangunan" },
+  { label: "Struktur Organisasi", href: "/struktur-organisasi", desc: "Susunan perangkat dan pejabat" },
+  { label: "Potensi Wilayah", href: "/potensi-wilayah", desc: "Sumber daya dan potensi unggulan" },
+  { label: "Statistik", href: "/statistik", desc: "Data kependudukan dan wilayah" },
+  { label: "Dokumen", href: "/dokumen", desc: "Unduh dokumen resmi" },
+  { label: "FAQ", href: "/faq", desc: "Pertanyaan yang sering diajukan" },
+];
+---
+
+<BaseLayout title="Profil" description={`Profil ${institution.name}`} institution={institution}>
+  <SectionHeader title={`Profil ${institution.name}`} subtitle={institution.address ?? undefined} />
+
+  <section class="mx-auto max-w-6xl px-4 pb-16">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {links.map((link) => (
+        <a href={link.href} class="rounded-lg border border-slate-200 p-4 hover:border-brand-primary dark:border-slate-800">
+          <h2 class="font-medium text-slate-900 dark:text-white">{link.label}</h2>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{link.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

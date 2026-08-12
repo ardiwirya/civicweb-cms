@@ -1,0 +1,51 @@
+---
+import "@/styles/global.css";
+import Navbar from "@/components/public/Navbar.astro";
+import Footer from "@/components/public/Footer.astro";
+import { getInstitutionProfile, type InstitutionProfile } from "@/lib/config/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  // Opsional: kalau halaman pemanggil sudah fetch institution_profile sendiri
+  // (karena butuh field lain seperti vision/mission), data itu dioper ke sini
+  // supaya BaseLayout tidak fetch ulang ke database untuk hal yang sama.
+  institution?: InstitutionProfile;
+}
+
+const { title, description, institution: institutionProp } = Astro.props;
+const institution = institutionProp ?? (await getInstitutionProfile());
+
+const pageTitle = `${title} | ${institution.name}`;
+const pageDescription = description ?? institution.hero_subtitle ?? institution.name;
+---
+
+<!doctype html>
+<html lang="id" style={`--color-brand-primary: ${institution.primary_color}; --color-brand-secondary: ${institution.secondary_color};`}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href={institution.favicon_url ?? "/favicon.svg"} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    {institution.hero_image_url && <meta property="og:image" content={institution.hero_image_url} />}
+
+    <!-- Dark mode diterapkan sebelum render supaya tidak ada flash warna salah -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </head>
+  <body>
+    <Navbar institution={institution} />
+    <main>
+      <slot />
+    </main>
+    <Footer institution={institution} />
+  </body>
+</html>

@@ -22,12 +22,19 @@ import PotentialFormPage from "@/admin/pages/potensi-wilayah/PotentialFormPage";
 import InstitutionProfilePage from "@/admin/pages/profil/InstitutionProfilePage";
 import MessageListPage from "@/admin/pages/pesan/MessageListPage";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30 * 1000,
+    },
+  },
+});
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isLoading, userId } = useAuth();
 
-  if (isLoading) return <div className="p-6 text-sm text-slate-500">Memuat...</div>;
+  if (isLoading)
+    return <div className="p-6 text-sm text-slate-500">Memuat...</div>;
   if (!userId) return <Navigate to="/login" replace />;
 
   return <>{children}</>;
@@ -46,22 +53,46 @@ export default function App() {
                 <DashboardLayout>
                   <Routes>
                     <Route path="/" element={<DashboardPage />} />
-                    <Route path="/profil-instansi" element={<InstitutionProfilePage />} />
+                    <Route
+                      path="/profil-instansi"
+                      element={<InstitutionProfilePage />}
+                    />
                     <Route path="/berita" element={<NewsListPage />} />
                     <Route path="/berita/:id" element={<NewsFormPage />} />
-                    <Route path="/pengumuman" element={<AnnouncementListPage />} />
-                    <Route path="/pengumuman/:id" element={<AnnouncementFormPage />} />
+                    <Route
+                      path="/pengumuman"
+                      element={<AnnouncementListPage />}
+                    />
+                    <Route
+                      path="/pengumuman/:id"
+                      element={<AnnouncementFormPage />}
+                    />
                     <Route path="/agenda" element={<AgendaListPage />} />
                     <Route path="/agenda/:id" element={<AgendaFormPage />} />
                     <Route path="/galeri" element={<GalleryAlbumListPage />} />
-                    <Route path="/galeri/:id" element={<GalleryAlbumFormPage />} />
-                    <Route path="/galeri/:albumId/foto" element={<GalleryPhotosPage />} />
+                    <Route
+                      path="/galeri/:id"
+                      element={<GalleryAlbumFormPage />}
+                    />
+                    <Route
+                      path="/galeri/:albumId/foto"
+                      element={<GalleryPhotosPage />}
+                    />
                     <Route path="/dokumen" element={<DocumentListPage />} />
-                    <Route path="/struktur-organisasi" element={<OrganizationListPage />} />
+                    <Route
+                      path="/struktur-organisasi"
+                      element={<OrganizationListPage />}
+                    />
                     <Route path="/umkm" element={<BusinessListPage />} />
                     <Route path="/umkm/:id" element={<BusinessFormPage />} />
-                    <Route path="/potensi-wilayah" element={<PotentialListPage />} />
-                    <Route path="/potensi-wilayah/:id" element={<PotentialFormPage />} />
+                    <Route
+                      path="/potensi-wilayah"
+                      element={<PotentialListPage />}
+                    />
+                    <Route
+                      path="/potensi-wilayah/:id"
+                      element={<PotentialFormPage />}
+                    />
                     <Route path="/pesan" element={<MessageListPage />} />
                   </Routes>
                 </DashboardLayout>

@@ -132,25 +132,47 @@ export default function InstitutionProfilePage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-xl font-semibold text-slate-900">Profil Instansi</h1>
+      <h1 className="mb-2 text-xl font-semibold text-slate-900">
+        Profil Instansi
+      </h1>
       <p className="mb-6 text-sm text-slate-500">
-        Pengaturan ini menentukan branding di seluruh halaman publik: nama, logo, warna, dan kontak.
+        Pengaturan ini menentukan branding di seluruh halaman publik: nama,
+        logo, warna, dan kontak.
       </p>
 
-      <form onSubmit={handleSubmit((values) => saveMutation.mutate(values))} className="max-w-2xl space-y-6 rounded-lg border border-slate-200 bg-white p-6">
+      <form
+        onSubmit={handleSubmit((values) => saveMutation.mutate(values))}
+        className="max-w-2xl space-y-6 rounded-lg border border-slate-200 bg-white p-6"
+      >
         <section className="space-y-4">
           <h2 className="font-medium text-slate-900">Identitas</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Nama Instansi</label>
-              <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("name")} />
-              {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+              <label className="mb-1 block text-sm text-slate-700">
+                Nama Instansi
+              </label>
+              <input
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("name")}
+              />
+              {errors.name && (
+                <p className="mt-1 text-xs text-red-600">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Jenis Instansi</label>
-              <select className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("type")}>
+              <label className="mb-1 block text-sm text-slate-700">
+                Jenis Instansi
+              </label>
+              <select
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("type")}
+              >
                 {institutionTypes.map((t) => (
-                  <option key={t.value} value={t.value}>{t.label}</option>
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
                 ))}
               </select>
             </div>
@@ -158,9 +180,22 @@ export default function InstitutionProfilePage() {
 
           <div>
             <label className="mb-1 block text-sm text-slate-700">Logo</label>
-            <input type="file" accept="image/*" onChange={handleLogoUpload} className="text-sm" />
-            {isUploading && <p className="mt-1 text-xs text-slate-500">Mengunggah...</p>}
-            {logoUrl && <img src={logoUrl} alt="Logo" className="mt-2 h-16 object-contain" />}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleLogoUpload}
+              className="text-sm"
+            />
+            {isUploading && (
+              <p className="mt-1 text-xs text-slate-500">Mengunggah...</p>
+            )}
+            {logoUrl && (
+              <img
+                src={logoUrl}
+                alt="Logo"
+                className="mt-2 h-16 object-contain"
+              />
+            )}
           </div>
         </section>
 
@@ -168,12 +203,26 @@ export default function InstitutionProfilePage() {
           <h2 className="font-medium text-slate-900">Warna Brand</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Warna Utama</label>
-              <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} className="h-10 w-full rounded-md border border-slate-300" />
+              <label className="mb-1 block text-sm text-slate-700">
+                Warna Utama
+              </label>
+              <input
+                type="color"
+                value={primaryColor}
+                onChange={(e) => setPrimaryColor(e.target.value)}
+                className="h-10 w-full rounded-md border border-slate-300"
+              />
             </div>
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Warna Kedua</label>
-              <input type="color" value={secondaryColor} onChange={(e) => setSecondaryColor(e.target.value)} className="h-10 w-full rounded-md border border-slate-300" />
+              <label className="mb-1 block text-sm text-slate-700">
+                Warna Kedua
+              </label>
+              <input
+                type="color"
+                value={secondaryColor}
+                onChange={(e) => setSecondaryColor(e.target.value)}
+                className="h-10 w-full rounded-md border border-slate-300"
+              />
             </div>
           </div>
         </section>
@@ -182,27 +231,52 @@ export default function InstitutionProfilePage() {
           <h2 className="font-medium text-slate-900">Kontak</h2>
           <div>
             <label className="mb-1 block text-sm text-slate-700">Alamat</label>
-            <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("address")} />
+            <input
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("address")}
+            />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Telepon</label>
-              <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("phone")} />
+              <label className="mb-1 block text-sm text-slate-700">
+                Telepon
+              </label>
+              <input
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("phone")}
+              />
             </div>
             <div>
               <label className="mb-1 block text-sm text-slate-700">Email</label>
-              <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("email")} />
-              {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
+              <input
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="mt-1 text-xs text-red-600">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Facebook (username)</label>
-              <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("facebook")} />
+              <label className="mb-1 block text-sm text-slate-700">
+                Facebook (username)
+              </label>
+              <input
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("facebook")}
+              />
             </div>
             <div>
-              <label className="mb-1 block text-sm text-slate-700">Instagram (username)</label>
-              <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("instagram")} />
+              <label className="mb-1 block text-sm text-slate-700">
+                Instagram (username)
+              </label>
+              <input
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                {...register("instagram")}
+              />
             </div>
           </div>
         </section>
@@ -211,34 +285,72 @@ export default function InstitutionProfilePage() {
           <h2 className="font-medium text-slate-900">Visi & Misi</h2>
           <div>
             <label className="mb-1 block text-sm text-slate-700">Visi</label>
-            <textarea rows={2} className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("vision")} />
+            <textarea
+              rows={2}
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("vision")}
+            />
           </div>
           <div>
             <label className="mb-1 block text-sm text-slate-700">Misi</label>
-            <textarea rows={4} className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("mission")} />
+            <textarea
+              rows={4}
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("mission")}
+            />
           </div>
         </section>
 
         <section className="space-y-4 border-t border-slate-200 pt-4">
-          <h2 className="font-medium text-slate-900">Halaman Beranda & Footer</h2>
+          <h2 className="font-medium text-slate-900">
+            Halaman Beranda & Footer
+          </h2>
           <div>
-            <label className="mb-1 block text-sm text-slate-700">Judul Hero</label>
-            <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("hero_title")} />
+            <label className="mb-1 block text-sm text-slate-700">
+              Judul Hero
+            </label>
+            <input
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("hero_title")}
+            />
           </div>
           <div>
-            <label className="mb-1 block text-sm text-slate-700">Subjudul Hero</label>
-            <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("hero_subtitle")} />
+            <label className="mb-1 block text-sm text-slate-700">
+              Subjudul Hero
+            </label>
+            <input
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("hero_subtitle")}
+            />
           </div>
           <div>
-            <label className="mb-1 block text-sm text-slate-700">Teks Footer</label>
-            <input className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" {...register("footer_text")} />
+            <label className="mb-1 block text-sm text-slate-700">
+              Teks Footer
+            </label>
+            <input
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              {...register("footer_text")}
+            />
           </div>
         </section>
 
-        {saveMutation.isError && <p className="text-sm text-red-600">Gagal menyimpan, silakan coba lagi.</p>}
-        {saveSuccess && <p className="text-sm text-green-600">Perubahan tersimpan.</p>}
+        {saveMutation.isError && (
+          <p className="text-sm text-red-600">
+            Gagal menyimpan:{" "}
+            {saveMutation.error instanceof Error
+              ? saveMutation.error.message
+              : "unknown error"}
+          </p>
+        )}
+        {saveSuccess && (
+          <p className="text-sm text-green-600">Perubahan tersimpan.</p>
+        )}
 
-        <button type="submit" disabled={isSubmitting || isUploading} className="rounded-md bg-brand-primary px-4 py-2 text-sm font-medium text-white disabled:opacity-60">
+        <button
+          type="submit"
+          disabled={isSubmitting || isUploading}
+          className="rounded-md bg-brand-primary px-4 py-2 text-sm font-medium text-white disabled:opacity-60"
+        >
           {isSubmitting ? "Menyimpan..." : "Simpan Perubahan"}
         </button>
       </form>

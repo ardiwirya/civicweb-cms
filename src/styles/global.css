@@ -16,5 +16,10 @@ html {
 }
 
 body {
-  @apply bg-white text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100;
+  @apply flex min-h-screen flex-col bg-white text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100;
+}
+
+/* main mengisi sisa ruang vertikal, footer otomatis terdorong ke bawah viewport */
+main {
+  @apply flex-1;
 }

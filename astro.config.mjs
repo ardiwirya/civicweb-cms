@@ -12,7 +12,7 @@ export default defineConfig({
   // Adapter Vercel karena project ini di-deploy ke Vercel.
   // Untuk self-host di VPS sendiri, ganti ke @astrojs/node (mode: "standalone").
   adapter: vercel({
-    runtime: "nodejs20.x",
+    runtime: "nodejs24.x",
   }),
   integrations: [
     react(),

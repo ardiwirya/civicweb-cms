@@ -4,6 +4,10 @@ Template website instansi (desa, kecamatan, dinas, sekolah, lembaga, dll) yang
 reusable. Satu deployment = satu instansi. Semua branding dan konten diatur
 lewat database, bukan lewat kode.
 
+## Preview
+
+![Home](/public/home.png)
+
 ## Tech Stack
 
 - Astro (public website, SSR)
